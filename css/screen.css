@@ -66,3 +66,50 @@ a img {
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
+
+/* line 14, ../sass/screen.sass */
+#gallery {
+  width: 700px;
+  height: 400px;
+  margin: 50px auto;
+  overflow: hidden;
+}
+
+/* line 20, ../sass/screen.sass */
+.slide-container {
+  width: 2800px;
+  *zoom: 1;
+}
+/* line 38, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+.slide-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* line 24, ../sass/screen.sass */
+.slide {
+  float: left;
+  width: 700px;
+  height: 400px;
+}
+
+/* line 29, ../sass/screen.sass */
+.slide1 {
+  background-color: orange;
+}
+
+/* line 32, ../sass/screen.sass */
+.slide2 {
+  background-color: green;
+}
+
+/* line 35, ../sass/screen.sass */
+.slide3 {
+  background-color: blue;
+}
+
+/* line 38, ../sass/screen.sass */
+.slide4 {
+  background-color: purple;
+}

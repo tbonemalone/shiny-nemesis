@@ -3,4 +3,40 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
-@import "compass/reset";
+@import compass/reset
+@import compass/css3
+@import compass/utilities/general
+
+// variables
+$gallery-width: 700px
+$num_slides: 4 // this will eventually be moved into the js
+
+#gallery
+  width: $gallery-width
+  height: 400px
+  margin: 50px auto
+  overflow: hidden
+
+.slide-container
+  width: $gallery-width * $num_slides
+  +pie-clearfix
+
+.slide
+  float: left
+  width: $gallery-width
+  height: 400px
+
+.slide1
+  background-color: orange
+
+.slide2
+  background-color: green
+
+.slide3
+  background-color: blue
+
+.slide4
+  background-color: purple
+
+
+
