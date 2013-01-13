@@ -4,7 +4,7 @@
 // create the gallery and style without having to recode
 // an entire slideshow.
 // Configure gallery options by passing in an options object
-//
+
 // Example
 
 var test_options = {
@@ -30,6 +30,7 @@ Gallery.prototype = {
 
   autoPlay: function(){
     // if true set up auto play
+    setInterval(self.transitionCrossfade, 2000);
   },
 
   setTransitionType: function(){
@@ -37,7 +38,7 @@ Gallery.prototype = {
     // else if slide do this
   },
 
-  setupForCrossfade: function(){
+  stackSlides: function(){
     // positions slides on top of each other in preparation for crossfade
     $(".slide-container").css("position", "relative");
     $(".slide").css({
@@ -50,22 +51,21 @@ Gallery.prototype = {
   transitionCrossfade: function(){
     // transitions slides via opacity transition
 
-    self.setupForCrossfade();
+    var cur_index = self.slides.index($(".active")),
+        next_index = cur_index + 1;
 
-    $(".slide").on("click", function(){
-      var cur_index = self.slides.index($(".active")),
-          next_index = cur_index + 1;
+    //
+    self.stackSlides();
 
-      if(next_index < self.number_slides){
-        // change the class
-        self.slides.eq(next_index).addClass("active");
-        self.slides.eq(cur_index).removeClass("active");
+    if(next_index < self.number_slides){
+      // change the class
+      self.slides.eq(next_index).addClass("active");
+      self.slides.eq(cur_index).removeClass("active");
+    }
+      else {
+        $(".active").removeClass("active");
+        self.slides.eq(0).addClass("active");
       }
-        else {
-          $(".active").removeClass("active");
-          self.slides.eq(0).addClass("active");
-        }
-    });
   },
 
   setPrimaryNav: function(){
@@ -83,6 +83,11 @@ Gallery.prototype = {
 
 $(document).ready(function(){
   var hpGallery = new Gallery("hp_gallery", test_options);
-  console.log(hpGallery.number_slides);
-  hpGallery.transitionCrossfade();
+
+  $(document).on("click", function(){
+    hpGallery.transitionCrossfade();
+  });
+
+  hpGallery.autoPlay()
+
 });
