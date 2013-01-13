@@ -1,4 +1,6 @@
+// this is for jshint
 /*global $:false*/
+
 // Make an object that contains functions such that
 // when we need to make a new gallery or slideshow
 // instantiating an instance of this object will
@@ -30,6 +32,8 @@ var Gallery = function(gallery_name, options){
 Gallery.prototype = {
 
   autoPlay: {
+    // start and stop autoplaying
+    // will need to build in ability to work with various transition types
     startAutoPlay: function(){
       // if true set up auto play
       console.log("start");
@@ -49,7 +53,6 @@ Gallery.prototype = {
 
   stackSlides: function(){
     // positions slides on top of each other in preparation for crossfade
-    $(".slide-container").css("position", "relative");
     $(".slide").css({
       position: "absolute",
       top: 0,
@@ -78,7 +81,19 @@ Gallery.prototype = {
   },
 
   setPrimaryNav: function(){
-    // display a primayr next/prev navigation is required
+    // display a primary next/prev navigation is required
+    // create two elements, prev and next
+    // add class primary-nav to both
+    // append to the dom
+    var prev = $(document.createElement("p")).addClass("prev"),
+        next = $(document.createElement("p")).addClass("next");
+
+    $(prev).addClass("primary-nav");
+    $(next).addClass("primary-nav");
+
+    // $("#gallery").append(prev).hide;
+    $(prev).hide().appendTo($("#gallery")).fadeIn()
+    $(next).hide().appendTo($("#gallery")).fadeIn()
   },
 
   setSecondaryNav: function(){
