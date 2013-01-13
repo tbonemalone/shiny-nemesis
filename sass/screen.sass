@@ -53,6 +53,16 @@ h3
   position: absolute
   top: ($slide-height - $prim-nav-height) / 2
   background-color: rgba(black, .7)
+  +border-radius($prim-nav-height / 2)
+  +rotate(45deg)
+  // &::after
+  //   content: ""
+  //   position: absolute
+  //   top: 0
+  //   left: 0
+  //   width: 10px
+  //   height: 10px
+  //   background-color: white
   &:hover
     background-color: rgba(black, .5)
     cursor: pointer

@@ -31,6 +31,8 @@ var Gallery = function(gallery_name, options){
 
 Gallery.prototype = {
 
+  // maybe create a state object to track current slide, next slide and prev slide
+
   autoPlay: {
     // start and stop autoplaying
     // will need to build in ability to work with various transition types
@@ -66,7 +68,6 @@ Gallery.prototype = {
     var cur_index = self.slides.index($(".active")),
         next_index = cur_index + 1;
 
-    //
     self.stackSlides();
 
     if(next_index < self.number_slides){
@@ -80,7 +81,7 @@ Gallery.prototype = {
       }
   },
 
-  setPrimaryNav: function(){
+  addPrimaryNav: function(){
     // display a primary next/prev navigation is required
     // create two elements, prev and next
     // add class primary-nav to both
@@ -94,6 +95,24 @@ Gallery.prototype = {
     // $("#gallery").append(prev).hide;
     $(prev).hide().appendTo($("#gallery")).fadeIn()
     $(next).hide().appendTo($("#gallery")).fadeIn()
+  },
+
+  navigateToNext: function(index){
+    // the actual navigation via the buttons
+    cur_index = index,
+    next_index = index + 1;
+    // when the user clicks a button navigate to the previous or the next slide
+    $(".active").removeClass("active");
+    self.slides.eq(next_index).addClass("active");
+    console.log(cur_index);
+    console.log(next_index);
+  },
+
+  navigateToPrev: function(index){
+    cur_index = self.slides.index($(".active")),
+    prev_index = cur_index - 1;
+    $(".active").removeClass("active");
+    self.slides.eq(prev_index).addClass("active");
   },
 
   setSecondaryNav: function(){
@@ -113,9 +132,30 @@ $(document).ready(function(){
   // });
 
   var t = hpGallery.autoPlay.startAutoPlay();
-  $(document).on("click", function(){
+  $(document).one("click", function(){
     hpGallery.autoPlay.stopAutoPlay(t);
-    hpGallery.setPrimaryNav();
+    hpGallery.stackSlides();
+    hpGallery.addPrimaryNav();
   });
 
+  $(".primary-nav").live("click",function(){
+    cur_index = $(".active").index();
+    $this = $(this)
+    console.log("click");
+
+    if($this.hasClass("next") && cur_index < self.slides.length){
+      console.log("moving to next");
+      hpGallery.navigateToNext(cur_index);
+    }
+      else if(cur_index === 0) {
+        // got to last
+      }
+      else if(cur_index === self.slides.length){
+        // got to first
+      }
+      else {
+        console.log("previous it is");
+        hpGallery.navigateToPrev(cur_index);
+      }
+  });
 });
