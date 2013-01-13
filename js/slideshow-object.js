@@ -1,3 +1,4 @@
+/*global $:false*/
 // Make an object that contains functions such that
 // when we need to make a new gallery or slideshow
 // instantiating an instance of this object will
@@ -21,16 +22,24 @@ var Gallery = function(gallery_name, options){
   this.autoplay = options.autoplay || true,
   this.primary_nav = options.primary_nav || false,
   this.secondary_nav = options.secondary_nav || false,
-  this.slides = $(".slide"),
-  this.number_slides = $(".slide").length || 0,
+  this.slides = $(".slide") || "undefined",
+  this.number_slides = $(".slide").length || 0;
   self = this; // set object reference to this as self.
 };
 
 Gallery.prototype = {
 
-  autoPlay: function(){
-    // if true set up auto play
-    setInterval(self.transitionCrossfade, 2000);
+  autoPlay: {
+    startAutoPlay: function(){
+      // if true set up auto play
+      console.log("start");
+      var t = setInterval(self.transitionCrossfade, 2000);
+      return t;
+    },
+    stopAutoPlay: function(t){
+      console.log("stop");
+      clearInterval(t);
+    }
   },
 
   setTransitionType: function(){
