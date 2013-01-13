@@ -79,6 +79,7 @@ h3 {
 /* line 18, ../sass/screen.sass */
 .slide-container {
   width: 2800px;
+  position: relative;
   *zoom: 1;
 }
 /* line 38, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
@@ -88,7 +89,7 @@ h3 {
   clear: both;
 }
 
-/* line 22, ../sass/screen.sass */
+/* line 23, ../sass/screen.sass */
 .slide {
   float: left;
   width: 700px;
@@ -97,29 +98,34 @@ h3 {
   -moz-transition: opacity 1s ease-in;
   -o-transition: opacity 1s ease-in;
   transition: opacity 1s ease-in;
+  opacity: 0;
+}
+/* line 29, ../sass/screen.sass */
+.slide.active {
+  opacity: 1;
 }
 
-/* line 28, ../sass/screen.sass */
+/* line 32, ../sass/screen.sass */
 .slide1 {
   background-color: orange;
 }
 
-/* line 31, ../sass/screen.sass */
+/* line 35, ../sass/screen.sass */
 .slide2 {
   background-color: green;
 }
 
-/* line 34, ../sass/screen.sass */
+/* line 38, ../sass/screen.sass */
 .slide3 {
   background-color: blue;
 }
 
-/* line 37, ../sass/screen.sass */
+/* line 41, ../sass/screen.sass */
 .slide4 {
   background-color: purple;
 }
 
-/* line 40, ../sass/screen.sass */
+/* line 44, ../sass/screen.sass */
 .no-show {
   opacity: 0;
 }

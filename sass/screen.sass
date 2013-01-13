@@ -17,6 +17,7 @@ h3
 
 .slide-container
   width: $gallery-width * $num_slides
+  position: relative
   +pie-clearfix
 
 .slide
@@ -24,6 +25,9 @@ h3
   width: $gallery-width
   height: 400px
   +transition(opacity 1s ease-in)
+  opacity: 0
+  &.active
+    opacity: 1
 
 .slide1
   background-color: orange
@@ -39,6 +43,7 @@ h3
 
 .no-show
   opacity: 0
+
 
 
 

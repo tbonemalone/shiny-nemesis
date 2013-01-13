@@ -14,14 +14,16 @@ var test_options = {
       "secondary_nav": true,
     };
 
-// basic contstructor function
+// basic constructor function
 var Gallery = function(gallery_name, options){
   this.name = gallery_name,
   this.transition = options.transition || "crossfade",
   this.autoplay = options.autoplay || true,
   this.primary_nav = options.primary_nav || false,
   this.secondary_nav = options.secondary_nav || false,
-  this.number_slides = $(".slide").length || 0;
+  this.slides = $(".slide"),
+  this.number_slides = $(".slide").length || 0,
+  self = this; // set object reference to this as self.
 };
 
 Gallery.prototype = {
@@ -35,27 +37,33 @@ Gallery.prototype = {
     // else if slide do this
   },
 
-  transitionOpacity: function(){
-    console.log("opacity");
-    var self = this;
-    // hide all slides but first
-    // on click
-      // opacity 0 on current slide
-      // opacity 1 on the next slide
-    var slides = $(".slide");
+  setupForCrossfade: function(){
+    // positions slides on top of each other in preparation for crossfade
+    $(".slide-container").css("position", "relative");
+    $(".slide").css({
+      position: "absolute",
+      top: 0,
+      left: 0
+    });
+  },
+
+  transitionCrossfade: function(){
+    // transitions slides via opacity transition
+
+    self.setupForCrossfade();
 
     $(".slide").on("click", function(){
-      var cur_index = slides.index($(".active")),
+      var cur_index = self.slides.index($(".active")),
           next_index = cur_index + 1;
 
       if(next_index < self.number_slides){
         // change the class
-        slides.eq(next_index).addClass("active");
-        slides.eq(cur_index).removeClass("active");
+        self.slides.eq(next_index).addClass("active");
+        self.slides.eq(cur_index).removeClass("active");
       }
         else {
-          $(".active").removeClass();
-          slides.eq(0).addClass("active");
+          $(".active").removeClass("active");
+          self.slides.eq(0).addClass("active");
         }
     });
   },
@@ -76,5 +84,5 @@ Gallery.prototype = {
 $(document).ready(function(){
   var hpGallery = new Gallery("hp_gallery", test_options);
   console.log(hpGallery.number_slides);
-  hpGallery.transitionOpacity();
+  hpGallery.transitionCrossfade();
 });
