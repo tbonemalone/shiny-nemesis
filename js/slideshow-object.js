@@ -108,10 +108,14 @@ Gallery.prototype = {
 $(document).ready(function(){
   var hpGallery = new Gallery("hp_gallery", test_options);
 
-  $(document).on("click", function(){
-    hpGallery.transitionCrossfade();
-  });
+  // $(document).on("click", function(){
+  //   hpGallery.transitionCrossfade();
+  // });
 
-  hpGallery.autoPlay()
+  var t = hpGallery.autoPlay.startAutoPlay();
+  $(document).on("click", function(){
+    hpGallery.autoPlay.stopAutoPlay(t);
+    hpGallery.setPrimaryNav();
+  });
 
 });

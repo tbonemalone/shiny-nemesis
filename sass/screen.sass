@@ -4,6 +4,8 @@
 
 // variables
 $gallery-width: 700px
+$slide-height: 400px
+$prim-nav-height: 20px
 $num_slides: 4 // this will eventually be moved into the js
 
 h3
@@ -12,6 +14,7 @@ h3
 #gallery
   width: $gallery-width
   height: 400px
+  position: relative
   margin: 50px auto
   overflow: hidden
 
@@ -23,7 +26,7 @@ h3
 .slide
   float: left
   width: $gallery-width
-  height: 400px
+  height: $slide-height
   +transition(opacity 1s ease-in)
   opacity: 0
   &.active
@@ -44,6 +47,19 @@ h3
 .no-show
   opacity: 0
 
+.primary-nav
+  width: $prim-nav-height
+  height: $prim-nav-height
+  position: absolute
+  top: ($slide-height - $prim-nav-height) / 2
+  background-color: rgba(black, .7)
+  &:hover
+    background-color: rgba(black, .5)
+    cursor: pointer
+  &.prev
+    left: $prim-nav-height
+  &.next
+    right: $prim-nav-height
 
 
 
