@@ -1,8 +1,3 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-
 @import compass/reset
 @import compass/css3
 @import compass/utilities/general
@@ -10,6 +5,9 @@
 // variables
 $gallery-width: 700px
 $num_slides: 4 // this will eventually be moved into the js
+
+h3
+  text-align: center
 
 #gallery
   width: $gallery-width
@@ -25,6 +23,7 @@ $num_slides: 4 // this will eventually be moved into the js
   float: left
   width: $gallery-width
   height: 400px
+  +transition(opacity 1s ease-in)
 
 .slide1
   background-color: orange
@@ -37,6 +36,9 @@ $num_slides: 4 // this will eventually be moved into the js
 
 .slide4
   background-color: purple
+
+.no-show
+  opacity: 0
 
 
 
