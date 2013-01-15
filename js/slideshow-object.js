@@ -55,11 +55,7 @@ Gallery.prototype = {
 
   stackSlides: function(){
     // positions slides on top of each other in preparation for crossfade
-    $(".slide").css({
-      position: "absolute",
-      top: 0,
-      left: 0
-    });
+    $(".slide-container").addClass("crossfade");
   },
 
   transitionCrossfade: function(){
