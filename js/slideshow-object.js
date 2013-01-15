@@ -128,21 +128,25 @@ $(document).ready(function(){
   });
 
   $(".primary-nav").live("click",function(){
-    cur_index = $(".active").index();
-    $this = $(this)
-    console.log("click");
+    var cur_index = $(".active").index(),
+        $this = $(this);
 
-    if($this.hasClass("next") && cur_index < self.slides.length){
-      console.log("moving to next");
-      var cur_index = cur_index;
-    }
+    // everything below this line needs to be cleaned up.
+    // it's all crap
+    if($this.hasClass("next")){
+     if(cur_index < hpGallery.slides.length - 1){
+        var cur_index = cur_index;
+      }
       else {
-        // got to first
-        // we're not getting in here.
-        console.log("in the else");
         var cur_index = -1;
       }
-    console.log(cur_index);
+    }
     hpGallery.navigateToNext(cur_index);
+
+    if($this.hasClass("prev")){
+      console.log("prev");
+      cur_index = cur_index;
+    }
   });
+
 });
