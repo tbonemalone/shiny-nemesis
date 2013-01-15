@@ -88,20 +88,14 @@ Gallery.prototype = {
     $($next).hide().appendTo($("#gallery")).fadeIn()
   },
 
-  navigateToNext: function(index){
-    var cur_index = index,
-        next_index = index + 1;
-
+  navigateToNext: function(cur_index){
     $(".active").removeClass("active");
-    self.slides.eq(next_index).addClass("active");
+    self.slides.eq(cur_index + 1).addClass("active");
   },
 
-  navigateToPrev: function(index){
-    var cur_index = self.slides.index($(".active")),
-        prev_index = cur_index - 1;
-
+  navigateToPrev: function(cur_index){
     $(".active").removeClass("active");
-    self.slides.eq(prev_index).addClass("active");
+    self.slides.eq(cur_index - 1).addClass("active");
   },
 
   setSecondaryNav: function(){
@@ -116,10 +110,6 @@ Gallery.prototype = {
 $(document).ready(function(){
   var hpGallery = new Gallery("hp_gallery", test_options);
 
-  // $(document).on("click", function(){
-  //   hpGallery.transitionCrossfade();
-  // });
-
   var t = hpGallery.autoPlay.startAutoPlay();
   $(document).one("click", function(){
     hpGallery.autoPlay.stopAutoPlay(t);
@@ -131,8 +121,7 @@ $(document).ready(function(){
     var cur_index = $(".active").index(),
         $this = $(this);
 
-    // everything below this line needs to be cleaned up.
-    // it's all crap
+    // it feels like there is a better way to do this.
     if($this.hasClass("next")){
      if(cur_index < hpGallery.slides.length - 1){
         var cur_index = cur_index;
@@ -140,12 +129,18 @@ $(document).ready(function(){
       else {
         var cur_index = -1;
       }
+      hpGallery.navigateToNext(cur_index);
     }
-    hpGallery.navigateToNext(cur_index);
 
     if($this.hasClass("prev")){
-      console.log("prev");
       cur_index = cur_index;
+     if(cur_index === 0){
+        var cur_index = hpGallery.slides.length;
+      }
+      else {
+        var cur_index = cur_index;
+      }
+      hpGallery.navigateToPrev(cur_index);
     }
   });
 
