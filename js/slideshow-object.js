@@ -134,17 +134,15 @@ $(document).ready(function(){
 
     if($this.hasClass("next") && cur_index < self.slides.length){
       console.log("moving to next");
-      hpGallery.navigateToNext(cur_index);
+      var cur_index = cur_index;
     }
-      else if(cur_index === 0) {
-        // got to last
-      }
-      else if(cur_index === self.slides.length){
-        // got to first
-      }
       else {
-        console.log("previous it is");
-        hpGallery.navigateToPrev(cur_index);
+        // got to first
+        // we're not getting in here.
+        console.log("in the else");
+        var cur_index = -1;
       }
+    console.log(cur_index);
+    hpGallery.navigateToNext(cur_index);
   });
 });
