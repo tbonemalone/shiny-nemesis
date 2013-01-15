@@ -60,53 +60,46 @@ Gallery.prototype = {
 
   transitionCrossfade: function(){
     // transitions slides via opacity transition
-
-    var cur_index = self.slides.index($(".active")),
+    var cur_index = self.slides.index($(".active"));
         next_index = cur_index + 1;
 
+    // I pull this out of here. it doesn't belong
     self.stackSlides();
 
     if(next_index < self.number_slides){
       // change the class
-      self.slides.eq(next_index).addClass("active");
-      self.slides.eq(cur_index).removeClass("active");
+      self.navigateToNext(cur_index);
     }
       else {
-        $(".active").removeClass("active");
-        self.slides.eq(0).addClass("active");
+        cur_index = self.slides.length - 1;
+        self.navigateToNext(cur_index);
       }
   },
 
   addPrimaryNav: function(){
     // display a primary next/prev navigation is required
-    // create two elements, prev and next
-    // add class primary-nav to both
-    // append to the dom
-    var prev = $(document.createElement("p")).addClass("prev"),
-        next = $(document.createElement("p")).addClass("next");
+    var $prev = $(document.createElement("p")).addClass("prev"),
+        $next = $(document.createElement("p")).addClass("next");
 
-    $(prev).addClass("primary-nav");
-    $(next).addClass("primary-nav");
+    $($prev).addClass("primary-nav");
+    $($next).addClass("primary-nav");
 
-    // $("#gallery").append(prev).hide;
-    $(prev).hide().appendTo($("#gallery")).fadeIn()
-    $(next).hide().appendTo($("#gallery")).fadeIn()
+    $($prev).hide().appendTo($("#gallery")).fadeIn()
+    $($next).hide().appendTo($("#gallery")).fadeIn()
   },
 
   navigateToNext: function(index){
-    // the actual navigation via the buttons
-    cur_index = index,
-    next_index = index + 1;
-    // when the user clicks a button navigate to the previous or the next slide
+    var cur_index = index,
+        next_index = index + 1;
+
     $(".active").removeClass("active");
     self.slides.eq(next_index).addClass("active");
-    console.log(cur_index);
-    console.log(next_index);
   },
 
   navigateToPrev: function(index){
-    cur_index = self.slides.index($(".active")),
-    prev_index = cur_index - 1;
+    var cur_index = self.slides.index($(".active")),
+        prev_index = cur_index - 1;
+
     $(".active").removeClass("active");
     self.slides.eq(prev_index).addClass("active");
   },
