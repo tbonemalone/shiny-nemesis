@@ -100,6 +100,17 @@ Gallery.prototype = {
 
   setSecondaryNav: function(){
     // display a secondary navigation if require
+    // create an element for the secondary nav
+    var secondary_nav = $(document.createElement("div"));
+        secondary_nav.addClass("simple-nav-container");
+
+    for(var i=0; i < this.slides.length; i++){
+      console.log("add nav button " + i);
+      secondary_nav.append("<span class=\"simple-nav\"></span>");
+    }
+    console.log(secondary_nav);
+    $("#gallery").append(secondary_nav);
+
   },
 
   galleryInit: function(){
@@ -109,6 +120,7 @@ Gallery.prototype = {
 
 $(document).ready(function(){
   var hpGallery = new Gallery("hp_gallery", test_options);
+  hpGallery.setSecondaryNav();
 
   var t = hpGallery.autoPlay.startAutoPlay();
   $(document).one("click", function(){
