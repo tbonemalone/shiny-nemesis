@@ -117,7 +117,8 @@ $(document).ready(function(){
     hpGallery.addPrimaryNav();
   });
 
-  $(".primary-nav").live("click",function(){
+  // using .on() instead of .live() to get up to date
+  $(document).on("click", ".primary-nav", function(){
     var cur_index = $(".active").index(),
         $this = $(this);
 
